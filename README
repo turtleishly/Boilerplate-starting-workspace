@@ -1,0 +1,9 @@
+Initialize and commit
+git init
+git add .
+git commit -m "Initial backup"
+
+Create an empty GitHub repo (on github.com), then connect and push
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git push -u origin main
