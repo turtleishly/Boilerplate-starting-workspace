@@ -1,3 +1,6 @@
+git remote remove origin #Unlinks from boilerplate git
+Remove-Item -Recurse -Force .git #Removes .git folder, then can re-init below
+
 Initialize and commit
 git init
 git add .
