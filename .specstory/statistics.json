@@ -5,9 +5,18 @@
       "agent_message_count": 0,
       "start_timestamp": "2026-04-03T10:55:45+08:00",
       "end_timestamp": "1970-01-01T08:00:00+08:00",
-      "markdown_size_bytes": 296,
+      "markdown_size_bytes": 305,
       "provider": "copilotide",
-      "last_updated": "2026-05-07T01:14:14Z"
+      "last_updated": "2026-05-10T02:42:06Z"
+    },
+    "fad3a92e-1af3-49fe-bff5-7510b544986f": {
+      "user_message_count": 1,
+      "agent_message_count": 1,
+      "start_timestamp": "2026-05-10T10:41:55+08:00",
+      "end_timestamp": "1970-01-01T08:00:00+08:00",
+      "markdown_size_bytes": 338,
+      "provider": "copilotide",
+      "last_updated": "2026-05-10T02:43:03Z"
     }
   }
 }

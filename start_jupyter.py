@@ -3,7 +3,6 @@
 # Note, the printed link is broken at the linebreak
 
 import modal
-import time
 import secrets
 from pathlib import Path
 
@@ -12,6 +11,9 @@ requirements_path = Path(__file__).with_name("requirements.txt")
 
 # Looks for .env starting from this script's directory
 dotenv_secret = modal.Secret.from_dotenv(__file__)
+
+# Persistent cache for Hugging Face model downloads
+models_vol = modal.Volume.from_name("models-cache-vol", create_if_missing=True)
 
 
 my_image = (
@@ -27,7 +29,8 @@ my_image = (
         "matplotlib",
         "circuitsvis",
         "plotly",
-        "jaxtyping"
+        "jaxtyping",
+        "peft"
     )
     # removed .run_commands(...) to avoid local-path installs
 )
@@ -56,7 +59,19 @@ def main():
         encrypted_ports=[8888],
         timeout=3600, # Safety net: auto-shutdown after 1 hour
         app=app,
-        secrets=[dotenv_secret],  # injects .env keys as env vars
+        volumes={
+            "/root/cache": models_vol,
+        },
+        secrets=[
+            dotenv_secret,
+            modal.Secret.from_dict(
+                {
+                    "HF_HOME": "/root/cache",
+                    "TRANSFORMERS_CACHE": "/root/cache/transformers",
+                    "HF_HUB_CACHE": "/root/cache/hub",
+                }
+            ),
+        ],  # injects .env keys as env vars
     )
 
     # 3. Get the secure URL
